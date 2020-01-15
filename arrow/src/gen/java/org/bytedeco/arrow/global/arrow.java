@@ -53,7 +53,13 @@ public class arrow extends org.bytedeco.arrow.presets.arrow {
 // Targeting ../ArrayVectorVector.java
 
 
+// Targeting ../DatumVector.java
+
+
 // Targeting ../StringStringMap.java
+
+
+// Targeting ../StringDataTypeMap.java
 
 
 // Parsed from arrow/api.h
@@ -130,7 +136,7 @@ public static final int ARROW_VERSION_PATCH = 1;
 public static final int ARROW_VERSION = ((ARROW_VERSION_MAJOR * 1000) + ARROW_VERSION_MINOR) * 1000 + ARROW_VERSION_PATCH;
 
 /* #undef DOUBLE_CONVERSION_HAS_CASE_INSENSIBILITY */
-/* #undef GRPCPP_PP_INCLUDE */
+// #define GRPCPP_PP_INCLUDE
 
 
 // Parsed from arrow/util/checked_cast.h
@@ -420,6 +426,212 @@ public static final int ARROW_BITNESS = ARROW_BITNESS();
 // #endif  // Non-Windows
 
 // #endif  // ARROW_UTIL_VISIBILITY_H
+
+
+// Parsed from arrow/util/compression.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #pragma once
+
+// #include <cstdint>
+// #include <limits>
+// #include <memory>
+// #include <string>
+
+// #include "arrow/util/visibility.h"
+// Targeting ../Compression.java
+
+
+
+
+///
+@Namespace("arrow::util") @MemberGetter public static native int kUseDefaultCompressionLevel();
+// Targeting ../Compressor.java
+
+
+// Targeting ../Decompressor.java
+
+
+// Targeting ../Codec.java
+
+
+
+  // namespace util
+  // namespace arrow
+
+
+// Parsed from arrow/util/functional.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #pragma once
+
+// #include <tuple>
+
+// #include "arrow/util/macros.h"
+// Targeting ../call_traits.java
+
+
+
+  // namespace internal
+  // namespace arrow
+
+
+// Parsed from arrow/util/iterator.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #pragma once
+
+// #include <memory>
+// #include <type_traits>
+// #include <utility>
+// #include <vector>
+
+// #include "arrow/status.h"
+// #include "arrow/util/functional.h"
+// #include "arrow/util/macros.h"
+// #include "arrow/util/visibility.h"
+
+/** \brief A generic Iterator that can return errors */
+
+/** \brief Construct an Iterator which dereferences a (possibly smart) pointer
+ *  to invoke its Next function */
+
+/** \brief Construct an Iterator which invokes a callable on Next() */
+
+/** \brief Simple iterator which yields the elements of a std::vector */
+
+/** \brief MapIterator takes ownership of an iterator and a function to apply
+ *  on every element. The mapped function is not allowed to fail. */
+
+/** \brief Like MapIterator, but where the function can fail. */
+
+/** \brief FlattenIterator takes an iterator generating iterators and yields a
+ *  unified iterator that flattens/concatenates in a single stream. */
+
+  // namespace arrow
+
+
+// Parsed from arrow/util/memory.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #ifndef ARROW_UTIL_MEMORY_H
+// #define ARROW_UTIL_MEMORY_H
+
+// #include <cstdint>
+// #include <memory>
+
+// #include "arrow/util/macros.h"
+
+// A helper function for doing memcpy with multiple threads. This is required
+// to saturate the memory bandwidth of modern cpus.
+@Namespace("arrow::internal") public static native void parallel_memcopy(@Cast("uint8_t*") BytePointer dst, @Cast("const uint8_t*") BytePointer src, @Cast("int64_t") long nbytes,
+                      @Cast("uintptr_t") long block_size, int num_threads);
+@Namespace("arrow::internal") public static native void parallel_memcopy(@Cast("uint8_t*") ByteBuffer dst, @Cast("const uint8_t*") ByteBuffer src, @Cast("int64_t") long nbytes,
+                      @Cast("uintptr_t") long block_size, int num_threads);
+@Namespace("arrow::internal") public static native void parallel_memcopy(@Cast("uint8_t*") byte[] dst, @Cast("const uint8_t*") byte[] src, @Cast("int64_t") long nbytes,
+                      @Cast("uintptr_t") long block_size, int num_threads);
+
+// A helper function for checking if two wrapped objects implementing `Equals`
+// are equal.
+
+  // namespace internal
+  // namespace arrow
+
+// #endif  // ARROW_UTIL_MEMORY_H
+
+
+// Parsed from arrow/util/variant.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #ifndef ARROW_UTIL_VARIANT_H
+// #define ARROW_UTIL_VARIANT_H
+
+// #include "arrow/vendored/variant.hpp"  // IWYU pragma: export
+
+  // namespace util
+  // namespace arrow
+
+// #endif  // ARROW_UTIL_VARIANT_H
 
 
 // Parsed from arrow/util/bit_util.h
@@ -1605,6 +1817,9 @@ public static final double kDefaultAbsoluteTolerance = kDefaultAbsoluteTolerance
 @Namespace("arrow::internal") public static native void DieWithMessage(@StdString BytePointer msg);
 
 
+// Targeting ../DataTypeResult.java
+
+
 // Targeting ../ListArrayResult.java
 
 
@@ -1612,6 +1827,15 @@ public static final double kDefaultAbsoluteTolerance = kDefaultAbsoluteTolerance
 
 
 // Targeting ../StructArrayResult.java
+
+
+// Targeting ../DatumResult.java
+
+
+// Targeting ../RecordBatchWriterSharedResult.java
+
+
+// Targeting ../RecordBatchWriterUniqueResult.java
 
 
 
@@ -2641,7 +2865,7 @@ public static final double kDefaultAbsoluteTolerance = kDefaultAbsoluteTolerance
 /** \brief Create a strongly-typed Array instance from generic ArrayData
  *  @param data [in] the array contents
  *  @return the resulting Array instance */
-@Namespace("arrow") public static native @SharedPtr @ByVal Array MakeArray(@Const @SharedPtr @ByRef ArrayData data);
+@Namespace("arrow") public static native @SharedPtr @Cast({"", "std::shared_ptr<arrow::Array>"}) Array MakeArray(@SharedPtr @Cast({"", "std::shared_ptr<arrow::ArrayData>"}) ArrayData data);
 
 /** \brief Create a strongly-typed Array instance with all elements null
  *  @param type [in] the array type
@@ -3344,7 +3568,7 @@ public static final double kDefaultAbsoluteTolerance = kDefaultAbsoluteTolerance
  *  @param dictionary [in] the initial dictionary, if any. May be nullptr
  *  @param out [out] the created ArrayBuilder */
 @Namespace("arrow") public static native @ByVal Status MakeDictionaryBuilder(MemoryPool pool, @SharedPtr @Cast({"", "std::shared_ptr<arrow::DataType>"}) DataType type,
-                             @Const @SharedPtr @ByRef Array dictionary,
+                             @SharedPtr @Cast({"", "std::shared_ptr<arrow::Array>"}) Array dictionary,
                              @UniquePtr ArrayBuilder out);
 
   // namespace arrow
@@ -3678,6 +3902,1621 @@ public static final double kDefaultAbsoluteTolerance = kDefaultAbsoluteTolerance
   // namespace arrow
 
 // #endif  // ARROW_TENSOR_H
+
+
+// Parsed from arrow/io/api.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #ifndef ARROW_IO_API_H
+// #define ARROW_IO_API_H
+
+// #include "arrow/io/buffered.h"
+// #include "arrow/io/compressed.h"
+// #include "arrow/io/file.h"
+// #include "arrow/io/hdfs.h"
+// #include "arrow/io/interfaces.h"
+// #include "arrow/io/memory.h"
+
+// #endif  // ARROW_IO_API_H
+
+
+// Parsed from arrow/io/interfaces.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #ifndef ARROW_IO_INTERFACES_H
+// #define ARROW_IO_INTERFACES_H
+
+// #include <cstdint>
+// #include <memory>
+// #include <string>
+// #include <vector>
+
+// #include "arrow/util/macros.h"
+// #include "arrow/util/string_view.h"
+// #include "arrow/util/visibility.h"
+// Targeting ../FileMode.java
+
+
+// Targeting ../ObjectType.java
+
+
+// Targeting ../FileStatistics.java
+
+
+// Targeting ../IOFileSystem.java
+
+
+// Targeting ../FileInterface.java
+
+
+// Targeting ../Seekable.java
+
+
+// Targeting ../Writable.java
+
+
+// Targeting ../Readable.java
+
+
+// Targeting ../OutputStream.java
+
+
+// Targeting ../InputStream.java
+
+
+// Targeting ../RandomAccessFile.java
+
+
+// Targeting ../WritableFile.java
+
+
+// Targeting ../ReadWriteFileInterface.java
+
+
+
+  // namespace io
+  // namespace arrow
+
+// #endif  // ARROW_IO_INTERFACES_H
+
+
+// Parsed from arrow/io/concurrency.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #pragma once
+
+// #include <memory>
+
+// #include "arrow/io/interfaces.h"
+// #include "arrow/status.h"
+// #include "arrow/util/checked_cast.h"
+// #include "arrow/util/macros.h"
+// #include "arrow/util/visibility.h"
+// Targeting ../SharedExclusiveCheckerSharedLockGuard.java
+
+
+// Targeting ../SharedExclusiveCheckerExclusiveLockGuard.java
+
+
+// Targeting ../SharedExclusiveChecker.java
+
+
+// Targeting ../ReadableFileRandomAccessFileConcurrencyWrapper.java
+
+
+// Targeting ../BufferReaderRandomAccessFileConcurrencyWrapper.java
+
+
+
+  // namespace internal
+  // namespace io
+  // namespace arrow
+
+
+// Parsed from arrow/io/file.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// IO interface implementations for OS files
+
+// #ifndef ARROW_IO_FILE_H
+// #define ARROW_IO_FILE_H
+
+// #include <cstdint>
+// #include <memory>
+// #include <string>
+
+// #include "arrow/io/concurrency.h"
+// #include "arrow/io/interfaces.h"
+// #include "arrow/util/visibility.h"
+// Targeting ../FileOutputStream.java
+
+
+// Targeting ../ReadableFile.java
+
+
+// Targeting ../MemoryMappedFile.java
+
+
+
+  // namespace io
+  // namespace arrow
+
+// #endif  // ARROW_IO_FILE_H
+
+
+// Parsed from arrow/io/memory.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// Public API for different memory sharing / IO mechanisms
+
+// #pragma once
+
+// #include <cstdint>
+// #include <memory>
+
+// #include "arrow/buffer.h"
+// #include "arrow/io/concurrency.h"
+// #include "arrow/io/interfaces.h"
+// #include "arrow/memory_pool.h"
+// #include "arrow/util/string_view.h"
+// #include "arrow/util/visibility.h"
+// Targeting ../BufferOutputStream.java
+
+
+// Targeting ../MockOutputStream.java
+
+
+// Targeting ../FixedSizeBufferWriter.java
+
+
+// Targeting ../BufferReader.java
+
+
+
+  // namespace io
+  // namespace arrow
+
+
+// Parsed from arrow/io/slow.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// Slow stream implementations, mainly for testing and benchmarking
+
+// #pragma once
+
+// #include <cstdint>
+// #include <memory>
+// #include <utility>
+
+// #include "arrow/io/interfaces.h"
+// #include "arrow/util/visibility.h"
+// Targeting ../LatencyGenerator.java
+
+
+// Targeting ../InputStreamSlowInputStreamBase.java
+
+
+// Targeting ../RandomAccessFileSlowInputStreamBase.java
+
+
+// Targeting ../SlowInputStream.java
+
+
+// Targeting ../SlowRandomAccessFile.java
+
+
+
+  // namespace io
+  // namespace arrow
+
+
+// Parsed from arrow/filesystem/api.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #ifndef ARROW_FILESYSTEM_API_H
+// #define ARROW_FILESYSTEM_API_H
+
+// #include "arrow/filesystem/filesystem.h"  // IWYU pragma: export
+// #include "arrow/filesystem/localfs.h"     // IWYU pragma: export
+// #include "arrow/filesystem/mockfs.h"      // IWYU pragma: export
+// #include "arrow/filesystem/s3fs.h"        // IWYU pragma: export
+
+// #endif  // ARROW_FILESYSTEM_API_H
+
+
+// Parsed from arrow/filesystem/filesystem.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #pragma once
+
+// #include <chrono>
+// #include <cstdint>
+// #include <iosfwd>
+// #include <memory>
+// #include <string>
+// #include <vector>
+
+// #include "arrow/status.h"
+// #include "arrow/util/visibility.h"
+
+// The Windows API defines macros from *File resolving to either
+// *FileA or *FileW.  Need to undo them.
+// #ifdef _WIN32
+// #ifdef DeleteFile
+// #undef DeleteFile
+// #endif
+// #ifdef CopyFile
+// #undef CopyFile
+// #endif
+// #endif
+
+  // namespace io
+
+// A system clock time point expressed as a 64-bit (or more) number of
+// nanoseconds since the epoch.
+
+/** \brief EXPERIMENTAL: FileSystem entry type */
+@Namespace("arrow::fs") public enum FileType {
+  /** Entry does not exist */
+  
+///
+  NonExistent((byte)0),
+  /** Entry exists but its type is unknown
+   * 
+   *  This can designate a special file such as a Unix socket or character
+   *  device, or Windows NUL / CON / ... */
+  Unknown((byte)1),
+  /** Entry is a regular file */
+  File((byte)2),
+  /** Entry is a directory */
+  Directory((byte)3);
+
+    public final byte value;
+    private FileType(byte v) { this.value = v; }
+    private FileType(FileType e) { this.value = e.value; }
+    public FileType intern() { for (FileType e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+@Namespace("arrow::fs") public static native @StdString String ToString(FileType arg0);
+@Namespace("arrow::fs") public static native @StdString BytePointer ToString(@Cast("arrow::fs::FileType") byte arg0);
+
+@Namespace("arrow::fs") public static native @Cast("std::ostream*") @ByRef @Name("operator <<") Pointer shiftLeft(@Cast("std::ostream*") @ByRef Pointer os, FileType arg1);
+@Namespace("arrow::fs") public static native @Cast("std::ostream*") @ByRef @Name("operator <<") Pointer shiftLeft(@Cast("std::ostream*") @ByRef Pointer os, @Cast("arrow::fs::FileType") byte arg1);
+
+@Namespace("arrow::fs") @MemberGetter public static native @Cast("const int64_t") long kNoSize();
+public static final long kNoSize = kNoSize();
+@Namespace("arrow::fs") @MemberGetter public static native @ByRef @Cast("const arrow::fs::TimePoint*") Pointer kNoTime();
+// Targeting ../FileStats.java
+
+
+
+@Namespace("arrow::fs") public static native @Cast("std::ostream*") @ByRef @Name("operator <<") Pointer shiftLeft(@Cast("std::ostream*") @ByRef Pointer os, @Const @ByRef FileStats arg1);
+// Targeting ../Selector.java
+
+
+// Targeting ../FileSystem.java
+
+
+// Targeting ../SubTreeFileSystem.java
+
+
+// Targeting ../SlowFileSystem.java
+
+
+
+  // namespace fs
+  // namespace arrow
+
+
+// Parsed from arrow/filesystem/localfs.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #pragma once
+
+// #include <memory>
+// #include <string>
+// #include <vector>
+
+// #include "arrow/filesystem/filesystem.h"
+// Targeting ../LocalFileSystem.java
+
+
+
+  // namespace fs
+  // namespace arrow
+
+
+// Parsed from arrow/filesystem/mockfs.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #pragma once
+
+// #include <iosfwd>
+// #include <memory>
+// #include <string>
+// #include <vector>
+
+// #include "arrow/filesystem/filesystem.h"
+// Targeting ../DirInfo.java
+
+
+// Targeting ../FileInfo.java
+
+
+// Targeting ../MockFileSystem.java
+
+
+
+  // namespace internal
+  // namespace fs
+  // namespace arrow
+
+
+// Parsed from arrow/csv/api.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #ifndef ARROW_CSV_API_H
+// #define ARROW_CSV_API_H
+
+// #include "arrow/csv/options.h"
+// #include "arrow/csv/reader.h"
+
+// #endif  // ARROW_CSV_API_H
+
+
+// Parsed from arrow/csv/options.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #ifndef ARROW_CSV_OPTIONS_H
+// #define ARROW_CSV_OPTIONS_H
+
+// #include <cstdint>
+// #include <memory>
+// #include <string>
+// #include <unordered_map>
+// #include <vector>
+
+// #include "arrow/util/visibility.h"
+
+// Silly workaround for https://github.com/michaeljones/breathe/issues/453
+@Namespace("arrow::csv") @MemberGetter public static native byte kDefaultEscapeChar();
+// Targeting ../ParseOptions.java
+
+
+// Targeting ../ConvertOptions.java
+
+
+// Targeting ../ReadOptions.java
+
+
+
+  // namespace csv
+  // namespace arrow
+
+// #endif  // ARROW_CSV_OPTIONS_H
+
+
+// Parsed from arrow/csv/reader.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #ifndef ARROW_CSV_READER_H
+// #define ARROW_CSV_READER_H
+
+// #include <memory>
+
+// #include "arrow/csv/options.h"  // IWYU pragma: keep
+// #include "arrow/status.h"
+// #include "arrow/util/visibility.h"
+  // namespace io
+// Targeting ../TableReader.java
+
+
+
+  // namespace csv
+  // namespace arrow
+
+// #endif  // ARROW_CSV_READER_H
+
+
+// Parsed from arrow/compute/api.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #ifndef ARROW_COMPUTE_API_H
+// #define ARROW_COMPUTE_API_H
+
+// #include "arrow/compute/context.h"  // IWYU pragma: export
+// #include "arrow/compute/kernel.h"   // IWYU pragma: export
+
+// #include "arrow/compute/kernels/boolean.h"          // IWYU pragma: export
+// #include "arrow/compute/kernels/cast.h"             // IWYU pragma: export
+// #include "arrow/compute/kernels/compare.h"          // IWYU pragma: export
+// #include "arrow/compute/kernels/count.h"            // IWYU pragma: export
+// #include "arrow/compute/kernels/filter.h"           // IWYU pragma: export
+// #include "arrow/compute/kernels/hash.h"             // IWYU pragma: export
+// #include "arrow/compute/kernels/isin.h"             // IWYU pragma: export
+// #include "arrow/compute/kernels/mean.h"             // IWYU pragma: export
+// #include "arrow/compute/kernels/sort_to_indices.h"  // IWYU pragma: export
+// #include "arrow/compute/kernels/sum.h"              // IWYU pragma: export
+// #include "arrow/compute/kernels/take.h"             // IWYU pragma: export
+
+// #endif  // ARROW_COMPUTE_API_H
+
+
+// Parsed from arrow/compute/kernel.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #ifndef ARROW_COMPUTE_KERNEL_H
+// #define ARROW_COMPUTE_KERNEL_H
+
+// #include <memory>
+// #include <utility>
+// #include <vector>
+
+// #include "arrow/array.h"
+// #include "arrow/record_batch.h"
+// #include "arrow/scalar.h"
+// #include "arrow/table.h"
+// #include "arrow/util/macros.h"
+// #include "arrow/util/memory.h"
+// #include "arrow/util/variant.h"  // IWYU pragma: export
+// #include "arrow/util/visibility.h"
+// Targeting ../FunctionContext.java
+
+
+// Targeting ../OpKernel.java
+
+
+@Namespace("arrow::compute") public static native @Cast("bool") boolean CollectionEquals(@Const @ByRef DatumVector left,
+                                    @Const @ByRef DatumVector right);
+
+// Datums variants may have a length. This special value indicate that the
+// current variant does not have a length.
+@Namespace("arrow::compute") @MemberGetter public static native @Cast("const int64_t") long kUnknownLength();
+// Targeting ../Datum.java
+
+
+// Targeting ../UnaryKernel.java
+
+
+// Targeting ../BinaryKernel.java
+
+
+
+  // namespace compute
+  // namespace arrow
+
+// #endif  // ARROW_COMPUTE_KERNEL_H
+
+
+// Parsed from arrow/compute/kernels/compare.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #pragma once
+
+// #include <memory>
+
+// #include "arrow/compute/kernel.h"
+// #include "arrow/util/visibility.h"
+// Targeting ../CompareFunction.java
+
+
+// Targeting ../CompareBinaryKernel.java
+
+
+
+@Namespace("arrow::compute") public enum CompareOperator {
+  EQUAL(0),
+  NOT_EQUAL(1),
+  GREATER(2),
+  GREATER_EQUAL(3),
+  LESS(4),
+  LESS_EQUAL(5);
+
+    public final int value;
+    private CompareOperator(int v) { this.value = v; }
+    private CompareOperator(CompareOperator e) { this.value = e.value; }
+    public CompareOperator intern() { for (CompareOperator e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+// Targeting ../CompareOptions.java
+
+
+
+/** \brief Return a Compare CompareFunction
+ * 
+ *  @param context [in] FunctionContext passing context information
+ *  @param type [in] required to specialize the kernel
+ *  @param options [in] required to specify the compare operator
+ * 
+ *  @since 0.14.0
+ *  \note API not yet finalized */
+
+///
+///
+///
+@Namespace("arrow::compute") public static native @SharedPtr CompareFunction MakeCompareFunction(FunctionContext context,
+                                                     @Const @ByRef DataType type,
+                                                     @ByVal CompareOptions options);
+
+/** \brief Compare a numeric array with a scalar.
+ * 
+ *  @param context [in] the FunctionContext
+ *  @param left [in] datum to compare, must be an Array
+ *  @param right [in] datum to compare, must be a Scalar of the same type than
+ *             left Datum.
+ *  @param options [in] compare options
+ *  @param out [out] resulting datum
+ * 
+ *  Note on floating point arrays, this uses ieee-754 compare semantics.
+ * 
+ *  @since 0.14.0
+ *  \note API not yet finalized */
+@Namespace("arrow::compute") public static native @ByVal Status Compare(FunctionContext context, @Const @ByRef Datum left, @Const @ByRef Datum right,
+               @ByVal CompareOptions options, Datum out);
+
+  // namespace compute
+  // namespace arrow
+
+
+// Parsed from arrow/ipc/api.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #ifndef ARROW_IPC_API_H
+// #define ARROW_IPC_API_H
+
+// #include "arrow/ipc/dictionary.h"
+// #include "arrow/ipc/feather.h"
+// #include "arrow/ipc/json_simple.h"
+// #include "arrow/ipc/message.h"
+// #include "arrow/ipc/reader.h"
+// #include "arrow/ipc/writer.h"
+
+// #endif  // ARROW_IPC_API_H
+
+
+// Parsed from arrow/ipc/dictionary.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// Tools for dictionaries in IPC context
+
+// #ifndef ARROW_IPC_DICTIONARY_H
+// #define ARROW_IPC_DICTIONARY_H
+
+// #include <cstdint>
+// #include <memory>
+// #include <unordered_map>
+
+// #include "arrow/status.h"
+// #include "arrow/util/macros.h"
+// #include "arrow/util/visibility.h"
+// Targeting ../DictionaryMemo.java
+
+
+
+@Namespace("arrow::ipc") public static native @ByVal Status CollectDictionaries(@Const @ByRef RecordBatch batch, DictionaryMemo memo);
+
+  // namespace ipc
+  // namespace arrow
+
+// #endif  // ARROW_IPC_DICTIONARY_H
+
+
+// Parsed from arrow/ipc/feather.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// Public API for the "Feather" file format, originally created at
+// http://github.com/wesm/feather
+
+// #ifndef ARROW_IPC_FEATHER_H
+// #define ARROW_IPC_FEATHER_H
+
+// #include <cstdint>
+// #include <memory>
+// #include <string>
+// #include <vector>
+
+// #include "arrow/util/visibility.h"
+
+  // namespace io
+
+@Namespace("arrow::ipc::feather") @MemberGetter public static native int kFeatherVersion();
+public static final int kFeatherVersion = kFeatherVersion();
+
+// ----------------------------------------------------------------------
+// Metadata accessor classes
+
+/** \class TableReader
+ *  \brief An interface for reading columns from Feather files */
+// Targeting ../TableWriter.java
+
+
+
+  // namespace feather
+  // namespace ipc
+  // namespace arrow
+
+// #endif  // ARROW_IPC_FEATHER_H
+
+
+// Parsed from arrow/ipc/json_simple.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// Implement a simple JSON representation format for arrays
+
+// #ifndef ARROW_IPC_JSON_SIMPLE_H
+// #define ARROW_IPC_JSON_SIMPLE_H
+
+// #include <memory>
+// #include <string>
+
+// #include "arrow/status.h"
+// #include "arrow/util/string_view.h"
+// #include "arrow/util/visibility.h"
+
+@Namespace("arrow::ipc::internal::json") public static native @ByVal Status ArrayFromJSON(@SharedPtr @Cast({"", "std::shared_ptr<arrow::DataType>"}) DataType arg0, @StdString String json,
+                     @SharedPtr Array out);
+@Namespace("arrow::ipc::internal::json") public static native @ByVal Status ArrayFromJSON(@SharedPtr @Cast({"", "std::shared_ptr<arrow::DataType>"}) DataType arg0, @StdString BytePointer json,
+                     @SharedPtr Array out);
+
+  // namespace json
+  // namespace internal
+  // namespace ipc
+  // namespace arrow
+
+// #endif  // ARROW_IPC_JSON_SIMPLE_H
+
+
+// Parsed from arrow/ipc/options.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// #pragma once
+
+// #include <cstdint>
+
+// #include "arrow/util/visibility.h"
+
+// ARROW-109: We set this number arbitrarily to help catch user mistakes. For
+// deeply nested schemas, it is expected the user will indicate explicitly the
+// maximum allowed recursion depth
+@Namespace("arrow::ipc") @MemberGetter public static native int kMaxNestingDepth();
+// Targeting ../IpcOptions.java
+
+
+
+  // namespace ipc
+  // namespace arrow
+
+
+// Parsed from arrow/ipc/message.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// C++ object model and user API for interprocess schema messaging
+
+// #pragma once
+
+// #include <cstdint>
+// #include <memory>
+// #include <string>
+
+// #include "arrow/ipc/options.h"
+// #include "arrow/status.h"
+// #include "arrow/util/macros.h"
+// #include "arrow/util/visibility.h"
+
+  // namespace io
+
+@Namespace("arrow::ipc") public enum MetadataVersion {
+  /** 0.1.0 */
+  V1((byte)0),
+
+  /** 0.2.0 */
+  V2((byte)1),
+
+  /** 0.3.0 to 0.7.1 */
+  V3((byte)2),
+
+  /** >= 0.8.0 */
+  V4((byte)3);
+
+    public final byte value;
+    private MetadataVersion(byte v) { this.value = v; }
+    private MetadataVersion(MetadataVersion e) { this.value = e.value; }
+    public MetadataVersion intern() { for (MetadataVersion e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+// Targeting ../Message.java
+
+
+
+@Namespace("arrow::ipc") public static native @StdString String FormatMessageType(Message.Type type);
+@Namespace("arrow::ipc") public static native @StdString BytePointer FormatMessageType(@Cast("arrow::ipc::Message::Type") int type);
+// Targeting ../MessageReader.java
+
+
+
+/** \brief Read encapsulated RPC message from position in file
+ * 
+ *  Read a length-prefixed message flatbuffer starting at the indicated file
+ *  offset. If the message has a body with non-zero length, it will also be
+ *  read
+ * 
+ *  The metadata_length includes at least the length prefix and the flatbuffer
+ * 
+ *  @param offset [in] the position in the file where the message starts. The
+ *  first 4 bytes after the offset are the message length
+ *  @param metadata_length [in] the total number of bytes to read from file
+ *  @param file [in] the seekable file interface to read from
+ *  @param message [out] the message read
+ *  @return Status success or failure */
+@Namespace("arrow::ipc") public static native @ByVal Status ReadMessage(@Cast("const int64_t") long offset, int metadata_length,
+                   RandomAccessFile file, @UniquePtr Message message);
+
+/** \brief Advance stream to an 8-byte offset if its position is not a multiple
+ *  of 8 already
+ *  @param stream [in] an input stream
+ *  @param alignment [in] the byte multiple for the metadata prefix, usually 8
+ *  or 64, to ensure the body starts on a multiple of that alignment
+ *  @return Status */
+@Namespace("arrow::ipc") public static native @ByVal Status AlignStream(InputStream stream, int alignment/*=8*/);
+@Namespace("arrow::ipc") public static native @ByVal Status AlignStream(InputStream stream);
+
+/** \brief Advance stream to an 8-byte offset if its position is not a multiple
+ *  of 8 already
+ *  @param stream [in] an output stream
+ *  @param alignment [in] the byte multiple for the metadata prefix, usually 8
+ *  or 64, to ensure the body starts on a multiple of that alignment
+ *  @return Status */
+@Namespace("arrow::ipc") public static native @ByVal Status AlignStream(OutputStream stream, int alignment/*=8*/);
+@Namespace("arrow::ipc") public static native @ByVal Status AlignStream(OutputStream stream);
+
+/** \brief Return error Status if file position is not a multiple of the
+ *  indicated alignment */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status CheckAligned(FileInterface stream, int alignment/*=8*/);
+@Namespace("arrow::ipc") public static native @ByVal Status CheckAligned(FileInterface stream);
+
+/** \brief Read encapsulated IPC message (metadata and body) from InputStream
+ * 
+ *  Returns null if there are not enough bytes available or the
+ *  message length is 0 (e.g. EOS in a stream) */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status ReadMessage(InputStream stream, @UniquePtr Message message);
+
+/** \brief Read encapsulated IPC message (metadata and body) from InputStream
+ * 
+ *  Like ReadMessage, except that the metadata is copied in a new buffer.
+ *  This is necessary if the stream returns non-CPU buffers. */
+
+///
+///
+@Namespace("arrow::ipc") public static native @ByVal Status ReadMessageCopy(InputStream stream, MemoryPool pool,
+                       @UniquePtr Message message);
+
+/** Write encapsulated IPC message Does not make assumptions about
+ *  whether the stream is aligned already. Can write legacy (pre
+ *  version 0.15.0) IPC message if option set
+ * 
+ *  continuation: 0xFFFFFFFF
+ *  message_size: int32
+ *  message: const void*
+ *  padding
+ * 
+ *  @param message [in] a buffer containing the metadata to write
+ *  @param options [in] IPC writing options, including alignment and
+ *  legacy message support
+ *  @param file [in,out] the OutputStream to write to
+ *  @param message_length [out] the total size of the payload written including
+ *  padding
+ *  @return Status */
+@Namespace("arrow::ipc") public static native @ByVal Status WriteMessage(@Const @ByRef ArrowBuffer message, @Const @ByRef IpcOptions options,
+                    OutputStream file, IntPointer message_length);
+@Namespace("arrow::ipc") public static native @ByVal Status WriteMessage(@Const @ByRef ArrowBuffer message, @Const @ByRef IpcOptions options,
+                    OutputStream file, IntBuffer message_length);
+@Namespace("arrow::ipc") public static native @ByVal Status WriteMessage(@Const @ByRef ArrowBuffer message, @Const @ByRef IpcOptions options,
+                    OutputStream file, int[] message_length);
+
+  // namespace ipc
+  // namespace arrow
+
+
+// Parsed from arrow/ipc/reader.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// Read Arrow files and streams
+
+// #ifndef ARROW_IPC_READER_H
+// #define ARROW_IPC_READER_H
+
+// #include <cstdint>
+// #include <memory>
+
+// #include "arrow/ipc/dictionary.h"
+// #include "arrow/ipc/message.h"
+// #include "arrow/ipc/options.h"
+// #include "arrow/record_batch.h"
+// #include "arrow/util/visibility.h"
+
+  // namespace io
+
+
+///
+// Targeting ../RecordBatchStreamReader.java
+
+
+// Targeting ../RecordBatchFileReader.java
+
+
+
+// Generic read functions; does not copy data if the input supports zero copy reads
+
+/** \brief Read Schema from stream serialized as a single IPC message
+ *  and populate any dictionary-encoded fields into a DictionaryMemo
+ * 
+ *  @param stream [in] an InputStream
+ *  @param dictionary_memo [in] for recording dictionary-encoded fields
+ *  @param out [out] the output Schema
+ *  @return Status
+ * 
+ *  If record batches follow the schema, it is better to use
+ *  RecordBatchStreamReader */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status ReadSchema(InputStream stream, DictionaryMemo dictionary_memo,
+                  @SharedPtr Schema out);
+
+/** \brief Read Schema from encapsulated Message
+ * 
+ *  @param message [in] a message instance containing metadata
+ *  @param dictionary_memo [in] DictionaryMemo for recording dictionary-encoded
+ *  fields. Can be nullptr if you are sure there are no
+ *  dictionary-encoded fields
+ *  @param out [out] the resulting Schema
+ *  @return Status */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status ReadSchema(@Const @ByRef Message message, DictionaryMemo dictionary_memo,
+                  @SharedPtr Schema out);
+
+/** Read record batch as encapsulated IPC message with metadata size prefix and
+ *  header
+ * 
+ *  @param schema [in] the record batch schema
+ *  @param dictionary_memo [in] DictionaryMemo which has any
+ *  dictionaries. Can be nullptr if you are sure there are no
+ *  dictionary-encoded fields
+ *  @param stream [in] the file where the batch is located
+ *  @param out [out] the read record batch
+ *  @return Status */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status ReadRecordBatch(@SharedPtr Schema schema,
+                       @Const DictionaryMemo dictionary_memo, InputStream stream,
+                       @SharedPtr RecordBatch out);
+
+/** \brief Read record batch from file given metadata and schema
+ * 
+ *  @param metadata [in] a Message containing the record batch metadata
+ *  @param schema [in] the record batch schema
+ *  @param dictionary_memo [in] DictionaryMemo which has any
+ *  dictionaries. Can be nullptr if you are sure there are no
+ *  dictionary-encoded fields
+ *  @param file [in] a random access file
+ *  @param out [out] the read record batch
+ *  @return Status */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status ReadRecordBatch(@Const @ByRef ArrowBuffer metadata, @SharedPtr Schema schema,
+                       @Const DictionaryMemo dictionary_memo, RandomAccessFile file,
+                       @SharedPtr RecordBatch out);
+
+/** \brief Read record batch from encapsulated Message
+ * 
+ *  @param message [in] a message instance containing metadata and body
+ *  @param schema [in] the record batch schema
+ *  @param dictionary_memo [in] DictionaryMemo which has any
+ *  dictionaries. Can be nullptr if you are sure there are no
+ *  dictionary-encoded fields
+ *  @param out [out] the resulting RecordBatch
+ *  @return Status */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status ReadRecordBatch(@Const @ByRef Message message, @SharedPtr Schema schema,
+                       @Const DictionaryMemo dictionary_memo,
+                       @SharedPtr RecordBatch out);
+
+/** Read record batch from file given metadata and schema
+ * 
+ *  @param metadata [in] a Message containing the record batch metadata
+ *  @param schema [in] the record batch schema
+ *  @param dictionary_memo [in] DictionaryMemo which has any
+ *  dictionaries. Can be nullptr if you are sure there are no
+ *  dictionary-encoded fields
+ *  @param file [in] a random access file
+ *  @param options [in] options for deserialization
+ *  @param out [out] the read record batch
+ *  @return Status */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status ReadRecordBatch(@Const @ByRef ArrowBuffer metadata, @SharedPtr Schema schema,
+                       @Const DictionaryMemo dictionary_memo, @Const @ByRef IpcOptions options,
+                       RandomAccessFile file, @SharedPtr RecordBatch out);
+
+/** \brief Read arrow::Tensor as encapsulated IPC message in file
+ * 
+ *  @param file [in] an InputStream pointed at the start of the message
+ *  @param out [out] the read tensor
+ *  @return Status */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status ReadTensor(InputStream file, @SharedPtr Tensor out);
+
+/** \brief EXPERIMENTAL: Read arrow::Tensor from IPC message
+ * 
+ *  @param message [in] a Message containing the tensor metadata and body
+ *  @param out [out] the read tensor
+ *  @return Status */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status ReadTensor(@Const @ByRef Message message, @SharedPtr Tensor out);
+
+/** \brief EXPERIMETNAL: Read arrow::SparseTensor as encapsulated IPC message in file
+ * 
+ *  @param file [in] an InputStream pointed at the start of the message
+ *  @param out [out] the read sparse tensor
+ *  @return Status */
+
+
+/** \brief EXPERIMENTAL: Read arrow::SparseTensor from IPC message
+ * 
+ *  @param message [in] a Message containing the tensor metadata and body
+ *  @param out [out] the read sparse tensor
+ *  @return Status */
+
+
+  // namespace ipc
+  // namespace arrow
+
+// #endif  // ARROW_IPC_READER_H
+
+
+// Parsed from arrow/ipc/writer.h
+
+// Licensed to the Apache Software Foundation (ASF) under one
+// or more contributor license agreements.  See the NOTICE file
+// distributed with this work for additional information
+// regarding copyright ownership.  The ASF licenses this file
+// to you under the Apache License, Version 2.0 (the
+// "License"); you may not use this file except in compliance
+// with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// Implement Arrow streaming binary format
+
+// #ifndef ARROW_IPC_WRITER_H
+// #define ARROW_IPC_WRITER_H
+
+// #include <cstdint>
+// #include <memory>
+// #include <vector>
+
+// #include "arrow/ipc/dictionary.h"  // IWYU pragma: export
+// #include "arrow/ipc/message.h"
+// #include "arrow/ipc/options.h"
+// #include "arrow/result.h"
+// #include "arrow/util/visibility.h"
+
+  // namespace io
+// Targeting ../RecordBatchWriter.java
+
+
+// Targeting ../RecordBatchStreamWriter.java
+
+
+// Targeting ../RecordBatchFileWriter.java
+
+
+
+/** \brief Low-level API for writing a record batch (without schema)
+ *  to an OutputStream as encapsulated IPC message. See Arrow format
+ *  documentation for more detail.
+ * 
+ *  @param batch [in] the record batch to write
+ *  @param buffer_start_offset [in] the start offset to use in the buffer metadata,
+ *  generally should be 0
+ *  @param dst [in] an OutputStream
+ *  @param metadata_length [out] the size of the length-prefixed flatbuffer
+ *  including padding to a 64-byte boundary
+ *  @param body_length [out] the size of the contiguous buffer block plus
+ *  @param options [in] options for serialization
+ *  @param pool [in] the memory pool to allocate memory from
+ *  @return Status */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status WriteRecordBatch(@Const @ByRef RecordBatch batch, @Cast("int64_t") long buffer_start_offset,
+                        OutputStream dst, IntPointer metadata_length,
+                        @Cast("int64_t*") LongPointer body_length, @Const @ByRef IpcOptions options,
+                        MemoryPool pool);
+@Namespace("arrow::ipc") public static native @ByVal Status WriteRecordBatch(@Const @ByRef RecordBatch batch, @Cast("int64_t") long buffer_start_offset,
+                        OutputStream dst, IntBuffer metadata_length,
+                        @Cast("int64_t*") LongBuffer body_length, @Const @ByRef IpcOptions options,
+                        MemoryPool pool);
+@Namespace("arrow::ipc") public static native @ByVal Status WriteRecordBatch(@Const @ByRef RecordBatch batch, @Cast("int64_t") long buffer_start_offset,
+                        OutputStream dst, int[] metadata_length,
+                        @Cast("int64_t*") long[] body_length, @Const @ByRef IpcOptions options,
+                        MemoryPool pool);
+
+/** \brief Serialize record batch as encapsulated IPC message in a new buffer
+ * 
+ *  @param batch [in] the record batch
+ *  @param pool [in] a MemoryPool to allocate memory from
+ *  @param out [out] the serialized message
+ *  @return Status */
+
+///
+///
+@Namespace("arrow::ipc") public static native @ByVal Status SerializeRecordBatch(@Const @ByRef RecordBatch batch, MemoryPool pool,
+                            @SharedPtr ArrowBuffer out);
+
+/** \brief Write record batch to OutputStream
+ * 
+ *  @param batch [in] the record batch to write
+ *  @param pool [in] a MemoryPool to use for temporary allocations, if needed
+ *  @param out [in] the OutputStream to write the output to
+ *  @return Status
+ * 
+ *  If writing to pre-allocated memory, you can use
+ *  arrow::ipc::GetRecordBatchSize to compute how much space is required */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status SerializeRecordBatch(@Const @ByRef RecordBatch batch, MemoryPool pool,
+                            OutputStream out);
+
+/** \brief Serialize schema as encapsulated IPC message
+ * 
+ *  @param schema [in] the schema to write
+ *  @param dictionary_memo [in] a DictionaryMemo for recording dictionary ids
+ *  @param pool [in] a MemoryPool to allocate memory from
+ *  @param out [out] the serialized schema
+ *  @return Status */
+@Namespace("arrow::ipc") public static native @ByVal Status SerializeSchema(@Const @ByRef Schema schema, DictionaryMemo dictionary_memo,
+                       MemoryPool pool, @SharedPtr ArrowBuffer out);
+
+/** \brief Write multiple record batches to OutputStream, including schema
+ *  @param batches [in] a vector of batches. Must all have same schema
+ *  @param options [in] options for serialization
+ *  @param dst [out] an OutputStream
+ *  @return Status */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status WriteRecordBatchStream(@Const @ByRef RecordBatchVector batches,
+                              @Const @ByRef IpcOptions options, OutputStream dst);
+
+/** \brief Compute the number of bytes needed to write a record batch including metadata
+ * 
+ *  @param batch [in] the record batch to write
+ *  @param size [out] the size of the complete encapsulated message
+ *  @return Status */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status GetRecordBatchSize(@Const @ByRef RecordBatch batch, @Cast("int64_t*") LongPointer size);
+@Namespace("arrow::ipc") public static native @ByVal Status GetRecordBatchSize(@Const @ByRef RecordBatch batch, @Cast("int64_t*") LongBuffer size);
+@Namespace("arrow::ipc") public static native @ByVal Status GetRecordBatchSize(@Const @ByRef RecordBatch batch, @Cast("int64_t*") long[] size);
+
+/** \brief Compute the number of bytes needed to write a tensor including metadata
+ * 
+ *  @param tensor [in] the tenseor to write
+ *  @param size [out] the size of the complete encapsulated message
+ *  @return Status */
+
+///
+@Namespace("arrow::ipc") public static native @ByVal Status GetTensorSize(@Const @ByRef Tensor tensor, @Cast("int64_t*") LongPointer size);
+@Namespace("arrow::ipc") public static native @ByVal Status GetTensorSize(@Const @ByRef Tensor tensor, @Cast("int64_t*") LongBuffer size);
+@Namespace("arrow::ipc") public static native @ByVal Status GetTensorSize(@Const @ByRef Tensor tensor, @Cast("int64_t*") long[] size);
+
+/** \brief EXPERIMENTAL: Convert arrow::Tensor to a Message with minimal memory
+ *  allocation
+ * 
+ *  @param tensor [in] the Tensor to write
+ *  @param pool [in] MemoryPool to allocate space for metadata
+ *  @param out [out] the resulting Message
+ *  @return Status */
+
+///
+///
+///
+@Namespace("arrow::ipc") public static native @ByVal Status GetTensorMessage(@Const @ByRef Tensor tensor, MemoryPool pool,
+                        @UniquePtr Message out);
+
+/** \brief Write arrow::Tensor as a contiguous message.
+ * 
+ *  The metadata and body are written assuming 64-byte alignment. It is the
+ *  user's responsibility to ensure that the OutputStream has been aligned
+ *  to a 64-byte multiple before writing the message.
+ * 
+ *  The message is written out as followed:
+ *  <pre>{@code
+ *  <metadata size> <metadata> <tensor data>
+ *  }</pre>
+ * 
+ *  @param tensor [in] the Tensor to write
+ *  @param dst [in] the OutputStream to write to
+ *  @param metadata_length [out] the actual metadata length, including padding
+ *  @param body_length [out] the acutal message body length
+ *  @return Status */
+@Namespace("arrow::ipc") public static native @ByVal Status WriteTensor(@Const @ByRef Tensor tensor, OutputStream dst, IntPointer metadata_length,
+                   @Cast("int64_t*") LongPointer body_length);
+@Namespace("arrow::ipc") public static native @ByVal Status WriteTensor(@Const @ByRef Tensor tensor, OutputStream dst, IntBuffer metadata_length,
+                   @Cast("int64_t*") LongBuffer body_length);
+@Namespace("arrow::ipc") public static native @ByVal Status WriteTensor(@Const @ByRef Tensor tensor, OutputStream dst, int[] metadata_length,
+                   @Cast("int64_t*") long[] body_length);
+
+// \brief EXPERIMENTAL: Write arrow::SparseTensor as a contiguous mesasge. The metadata,
+// sparse index, and body are written assuming 64-byte alignment. It is the
+// user's responsibility to ensure that the OutputStream has been aligned
+// to a 64-byte multiple before writing the message.
+//
+// \param[in] tensor the SparseTensor to write
+// \param[in] dst the OutputStream to write to
+// \param[out] metadata_length the actual metadata length, including padding
+// \param[out] body_length the actual message body length
+@Namespace("arrow::ipc") public static native @ByVal Status WriteSparseTensor(@Const @ByRef SparseTensor sparse_tensor, OutputStream dst,
+                         IntPointer metadata_length, @Cast("int64_t*") LongPointer body_length,
+                         MemoryPool pool);
+@Namespace("arrow::ipc") public static native @ByVal Status WriteSparseTensor(@Const @ByRef SparseTensor sparse_tensor, OutputStream dst,
+                         IntBuffer metadata_length, @Cast("int64_t*") LongBuffer body_length,
+                         MemoryPool pool);
+@Namespace("arrow::ipc") public static native @ByVal Status WriteSparseTensor(@Const @ByRef SparseTensor sparse_tensor, OutputStream dst,
+                         int[] metadata_length, @Cast("int64_t*") long[] body_length,
+                         MemoryPool pool);
+// Targeting ../IpcPayload.java
+
+
+// Targeting ../IpcPayloadWriter.java
+
+
+
+/** Create a new RecordBatchWriter from IpcPayloadWriter and schema.
+ * 
+ *  @param sink [in] the IpcPayloadWriter to write to
+ *  @param schema [in] the schema of the record batches to be written
+ *  @param out [out] the created RecordBatchWriter
+ *  @return Status */
+
+///
+@Namespace("arrow::ipc::internal") public static native @ByVal Status OpenRecordBatchWriter(@UniquePtr IpcPayloadWriter sink,
+                             @SharedPtr Schema schema,
+                             @UniquePtr RecordBatchWriter out);
+
+/** Create a new RecordBatchWriter from IpcPayloadWriter and schema.
+ * 
+ *  @param sink [in] the IpcPayloadWriter to write to
+ *  @param schema [in] the schema of the record batches to be written
+ *  @param options [in] options for serialization
+ *  @return Result<std::unique_ptr<RecordBatchWriter>> */
+@Namespace("arrow::ipc::internal") public static native @ByVal RecordBatchWriterUniqueResult OpenRecordBatchWriter(
+    @UniquePtr IpcPayloadWriter sink, @SharedPtr Schema schema,
+    @Const @ByRef IpcOptions options);
+
+/** \brief Compute IpcPayload for the given schema
+ *  @param schema [in] the Schema that is being serialized
+ *  @param options [in] options for serialization
+ *  @param dictionary_memo [in,out] class to populate with assigned dictionary ids
+ *  @param out [out] the returned vector of IpcPayloads
+ *  @return Status */
+@Namespace("arrow::ipc::internal") public static native @ByVal Status GetSchemaPayload(@Const @ByRef Schema schema, @Const @ByRef IpcOptions options,
+                        DictionaryMemo dictionary_memo, IpcPayload out);
+
+/** \brief Compute IpcPayload for a dictionary
+ *  @param id [in] the dictionary id
+ *  @param dictionary [in] the dictionary values
+ *  @param options [in] options for serialization
+ *  @param payload [out] the output IpcPayload
+ *  @return Status */
+@Namespace("arrow::ipc::internal") public static native @ByVal Status GetDictionaryPayload(@Cast("int64_t") long id, @SharedPtr @Cast({"", "std::shared_ptr<arrow::Array>"}) Array dictionary,
+                            @Const @ByRef IpcOptions options, MemoryPool pool,
+                            IpcPayload payload);
+
+/** \brief Compute IpcPayload for the given record batch
+ *  @param batch [in] the RecordBatch that is being serialized
+ *  @param options [in] options for serialization
+ *  @param pool [in,out] for any required temporary memory allocations
+ *  @param out [out] the returned IpcPayload
+ *  @return Status */
+@Namespace("arrow::ipc::internal") public static native @ByVal Status GetRecordBatchPayload(@Const @ByRef RecordBatch batch, @Const @ByRef IpcOptions options,
+                             MemoryPool pool, IpcPayload out);
+
+@Namespace("arrow::ipc::internal") public static native @ByVal Status WriteIpcPayload(@Const @ByRef IpcPayload payload, @Const @ByRef IpcOptions options,
+                       OutputStream dst, IntPointer metadata_length);
+@Namespace("arrow::ipc::internal") public static native @ByVal Status WriteIpcPayload(@Const @ByRef IpcPayload payload, @Const @ByRef IpcOptions options,
+                       OutputStream dst, IntBuffer metadata_length);
+@Namespace("arrow::ipc::internal") public static native @ByVal Status WriteIpcPayload(@Const @ByRef IpcPayload payload, @Const @ByRef IpcOptions options,
+                       OutputStream dst, int[] metadata_length);
+
+  // namespace internal
+
+  // namespace ipc
+  // namespace arrow
+
+// #endif  // ARROW_IPC_WRITER_H
 
 
 }

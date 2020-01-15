@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Samuel Audet
+ * Copyright (C) 2019-2020 Samuel Audet
  *
  * Licensed either under the Apache License, Version 2.0, or (at your option)
  * under the terms of the GNU General Public License as published by
@@ -35,9 +35,9 @@ import org.bytedeco.javacpp.tools.InfoMapper;
  * @author Samuel Audet
  */
 @Properties(
+    names = {"linux", "macosx", "windows"},
     value = {
         @Platform(
-            value = {"linux", "macosx", "windows"},
             compiler = "cpp11",
             define = {"UNIQUE_PTR_NAMESPACE std", "SHARED_PTR_NAMESPACE std"},
             include = {
@@ -47,12 +47,18 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "arrow/util/macros.h",
                 "arrow/util/type_traits.h",
                 "arrow/util/visibility.h",
+                "arrow/util/compression.h",
+                "arrow/util/functional.h",
+                "arrow/util/iterator.h",
+                "arrow/util/memory.h",
+                "arrow/util/variant.h",
                 "arrow/util/bit_util.h",
                 "arrow/util/ubsan.h",
                 "arrow/util/key_value_metadata.h",
                 "arrow/util/string_builder.h",
 //                "arrow/util/string_view.h",
 //                "arrow/vendored/string_view.hpp",
+//                "arrow/vendored/variant.hpp",
                 "arrow/status.h",
                 "arrow/memory_pool.h",
                 "arrow/buffer.h",
@@ -84,6 +90,31 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "arrow/table.h",
                 "arrow/table_builder.h",
                 "arrow/tensor.h",
+                "arrow/io/api.h",
+                "arrow/io/interfaces.h",
+                "arrow/io/concurrency.h",
+                "arrow/io/file.h",
+                "arrow/io/memory.h",
+                "arrow/io/slow.h",
+                "arrow/filesystem/api.h",
+                "arrow/filesystem/filesystem.h",
+                "arrow/filesystem/localfs.h",
+                "arrow/filesystem/mockfs.h",
+//                "arrow/filesystem/s3fs.h",
+                "arrow/csv/api.h",
+                "arrow/csv/options.h",
+                "arrow/csv/reader.h",
+                "arrow/compute/api.h",
+                "arrow/compute/kernel.h",
+                "arrow/compute/kernels/compare.h",
+                "arrow/ipc/api.h",
+                "arrow/ipc/dictionary.h",
+                "arrow/ipc/feather.h",
+                "arrow/ipc/json_simple.h",
+                "arrow/ipc/options.h",
+                "arrow/ipc/message.h",
+                "arrow/ipc/reader.h",
+                "arrow/ipc/writer.h",
             },
             link = "arrow@.15",
             resource = {"include", "lib"}
@@ -181,7 +212,8 @@ public class arrow implements InfoMapper {
                .put(new Info("arrow::DayTimeIntervalArray::TypeClass::DayMilliseconds").pointerTypes("DayTimeIntervalType.DayMilliseconds"))
 
                .put(new Info("arrow::BaseListType", "arrow::BaseBinaryType", "arrow::BaseListScalar", "arrow::NestedType", "arrow::NumberType",
-                             "arrow::PrimitiveCType", "arrow::internal::PrimitiveScalar", "arrow::Scalar", "arrow::StructScalar", "arrow::TemporalType").purify())
+                             "arrow::PrimitiveCType", "arrow::internal::PrimitiveScalar", "arrow::Scalar", "arrow::StructScalar", "arrow::TemporalType",
+                             "arrow::compute::CompareFunction").purify())
 
                .put(new Info("arrow::BaseBinaryScalar<arrow::BinaryType>").pointerTypes("BaseBinaryScalar").define())
                .put(new Info("arrow::BaseBinaryScalar<arrow::LargeBinaryType>").pointerTypes("BaseLargeBinaryScalar").define())
@@ -217,15 +249,15 @@ public class arrow implements InfoMapper {
                .put(new Info("arrow::ArrayData::GetValues<jboolean>").javaNames("GetValuesBoolean"))
                .put(new Info("arrow::ArrayData::GetValues<jchar>").javaNames("GetValuesChar"))
 
-               .put(new Info("std::shared_ptr<arrow::Scalar>").annotations("@SharedPtr").pointerTypes("Scalar"))
+               .put(new Info("std::shared_ptr<arrow::Scalar>").annotations("@SharedPtr").valueTypes("@Cast({\"\", \"std::shared_ptr<arrow::Scalar>\"}) Scalar").pointerTypes("Scalar"))
                .put(new Info("std::shared_ptr<arrow::Field>").annotations("@SharedPtr").pointerTypes("Field"))
-               .put(new Info("std::shared_ptr<arrow::Array>").annotations("@SharedPtr").pointerTypes("Array"))
-               .put(new Info("std::shared_ptr<arrow::ArrayData>").annotations("@SharedPtr").pointerTypes("ArrayData"))
+               .put(new Info("std::shared_ptr<arrow::Array>").annotations("@SharedPtr").valueTypes("@Cast({\"\", \"std::shared_ptr<arrow::Array>\"}) Array").pointerTypes("Array"))
+               .put(new Info("std::shared_ptr<arrow::ArrayData>").annotations("@SharedPtr").valueTypes("@Cast({\"\", \"std::shared_ptr<arrow::ArrayData>\"}) ArrayData").pointerTypes("ArrayData"))
                .put(new Info("std::shared_ptr<arrow::Buffer>").annotations("@SharedPtr").pointerTypes("ArrowBuffer"))
                .put(new Info("std::shared_ptr<arrow::ArrayBuilder>").annotations("@SharedPtr").pointerTypes("ArrayBuilder"))
-               .put(new Info("std::shared_ptr<arrow::RecordBatch>").annotations("@SharedPtr").pointerTypes("RecordBatch"))
-               .put(new Info("std::shared_ptr<arrow::ChunkedArray>").annotations("@SharedPtr").pointerTypes("ChunkedArray"))
-               .put(new Info("std::shared_ptr<arrow::Table>").annotations("@SharedPtr").pointerTypes("Table"))
+               .put(new Info("std::shared_ptr<arrow::RecordBatch>").annotations("@SharedPtr").valueTypes("@Cast({\"\", \"std::shared_ptr<arrow::RecordBatch>\"}) RecordBatch").pointerTypes("RecordBatch"))
+               .put(new Info("std::shared_ptr<arrow::ChunkedArray>").annotations("@SharedPtr").valueTypes("@Cast({\"\", \"std::shared_ptr<arrow::ChunkedArray>\"}) ChunkedArray").pointerTypes("ChunkedArray"))
+               .put(new Info("std::shared_ptr<arrow::Table>").annotations("@SharedPtr").valueTypes("@Cast({\"\", \"std::shared_ptr<arrow::Table>\"}) Table").pointerTypes("Table"))
                .put(new Info("std::shared_ptr<arrow::ListArray>").annotations("@SharedPtr").pointerTypes("ListArray"))
                .put(new Info("std::shared_ptr<arrow::BinaryArray>").annotations("@SharedPtr").pointerTypes("BinaryArray"))
                .put(new Info("std::shared_ptr<arrow::StructArray>").annotations("@SharedPtr").pointerTypes("StructArray"))
@@ -243,13 +275,21 @@ public class arrow implements InfoMapper {
                .put(new Info("std::vector<std::shared_ptr<arrow::ChunkedArray> >").pointerTypes("ChunkedArrayVector").define())
                .put(new Info("std::vector<std::shared_ptr<arrow::Table> >").pointerTypes("TableVector").define())
                .put(new Info("std::vector<std::vector<std::shared_ptr<arrow::Array> > >", "std::vector<arrow::ArrayVector>").pointerTypes("ArrayVectorVector").define())
+               .put(new Info("std::vector<arrow::compute::Datum>").pointerTypes("DatumVector").define())
                .put(new Info("arrow::BaseListArray<arrow::ListType>").pointerTypes("BaseListArray").define())
                .put(new Info("arrow::BaseBinaryArray<arrow::BinaryType>").pointerTypes("BaseBinaryArray").define())
                .put(new Info("arrow::BaseListArray<arrow::LargeListType>").pointerTypes("BaseLargeListArray").define())
                .put(new Info("arrow::BaseBinaryArray<arrow::LargeBinaryType>").pointerTypes("BaseLargeBinaryArray").define())
+               .put(new Info("arrow::Result<std::shared_ptr<arrow::DataType> >").pointerTypes("DataTypeResult").define())
                .put(new Info("arrow::Result<std::shared_ptr<arrow::ListArray> >").pointerTypes("ListArrayResult").define())
                .put(new Info("arrow::Result<std::shared_ptr<arrow::BinaryArray> >").pointerTypes("BinaryArrayResult").define())
                .put(new Info("arrow::Result<std::shared_ptr<arrow::StructArray> >").pointerTypes("StructArrayResult").define())
+               .put(new Info("arrow::Result<arrow::compute::Datum>").pointerTypes("DatumResult").define())
+               .put(new Info("arrow::Result<std::shared_ptr<arrow::ipc::RecordBatchWriter> >").pointerTypes("RecordBatchWriterSharedResult").define())
+               .put(new Info("arrow::Result<std::unique_ptr<arrow::ipc::RecordBatchWriter> >").pointerTypes("RecordBatchWriterUniqueResult").define())
+               .put(new Info("arrow::Result<std::unique_ptr<arrow::ipc::RecordBatchWriter> >(const arrow::Result<std::unique_ptr<arrow::ipc::RecordBatchWriter> >&)",
+                             "arrow::Result<std::unique_ptr<arrow::ipc::RecordBatchWriter> >::operator =").skip())
+               .put(new Info("std::unordered_map<std::string,std::shared_ptr<arrow::DataType> >").pointerTypes("StringDataTypeMap").define())
 
                .put(new Info("arrow::BaseListBuilder<arrow::ListType>").pointerTypes("BaseListBuilder").define().purify())
                .put(new Info("arrow::BaseListBuilder<arrow::LargeListType>").pointerTypes("BaseLargeListBuilder").define().purify())
@@ -258,8 +298,10 @@ public class arrow implements InfoMapper {
                .put(new Info("arrow::internal::BinaryDictionaryBuilderImpl<arrow::BinaryType>",
                              "arrow::internal::BinaryDictionaryBuilderImpl<arrow::StringType>",
                              "arrow::internal::BinaryDictionary32BuilderImpl<arrow::BinaryType>",
-                             "arrow::internal::BinaryDictionary32BuilderImpl<arrow::StringType>").pointerTypes("Pointer"))
-               .put(new Info("arrow::internal::DictionaryScalar", "arrow::NullBuilder::Append(std::nullptr_t)").skip())
+                             "arrow::internal::BinaryDictionary32BuilderImpl<arrow::StringType>", "arrow::fs::TimePoint").cast().pointerTypes("Pointer"))
+               .put(new Info("arrow::internal::DictionaryScalar", "arrow::NullBuilder::Append(std::nullptr_t)", "arrow::compute::Datum::value",
+                             "arrow::ipc::DictionaryMemo(arrow::ipc::DictionaryMemo)", "arrow::ipc::DictionaryMemo::operator =", "arrow::ipc::ReadSparseTensor").skip())
+               .put(new Info("arrow::compute::Datum::type").enumerate(false).valueTypes("int"))
 
                .put(new Info("arrow::NumericBuilder<arrow::Int8Type>").pointerTypes("Int8Builder").define())
                .put(new Info("arrow::NumericBuilder<arrow::Int16Type>").pointerTypes("Int16Builder").define())
@@ -272,6 +314,16 @@ public class arrow implements InfoMapper {
                .put(new Info("arrow::NumericBuilder<arrow::HalfFloatType>").pointerTypes("HalfFloatBuilder").define())
                .put(new Info("arrow::NumericBuilder<arrow::FloatType>").pointerTypes("FloatBuilder").define())
                .put(new Info("arrow::NumericBuilder<arrow::DoubleType>").pointerTypes("DoubleBuilder").define())
+
+               .put(new Info("arrow::io::FileSystem").pointerTypes("IOFileSystem"))
+               .put(new Info("arrow::io::internal::SharedLockGuard<arrow::io::internal::SharedExclusiveChecker>").pointerTypes("SharedExclusiveCheckerSharedLockGuard").define())
+               .put(new Info("arrow::io::internal::ExclusiveLockGuard<arrow::io::internal::SharedExclusiveChecker>").pointerTypes("SharedExclusiveCheckerExclusiveLockGuard").define())
+               .put(new Info("arrow::io::internal::RandomAccessFileConcurrencyWrapper<arrow::io::ReadableFile>",
+                             "arrow::io::internal::RandomAccessFileConcurrencyWrapper<ReadableFile>").pointerTypes("ReadableFileRandomAccessFileConcurrencyWrapper").define().purify())
+               .put(new Info("arrow::io::internal::RandomAccessFileConcurrencyWrapper<arrow::io::BufferReader>",
+                             "arrow::io::internal::RandomAccessFileConcurrencyWrapper<BufferReader>").pointerTypes("BufferReaderRandomAccessFileConcurrencyWrapper").define().purify())
+               .put(new Info("arrow::io::SlowInputStreamBase<arrow::io::InputStream>").pointerTypes("InputStreamSlowInputStreamBase").define().purify())
+               .put(new Info("arrow::io::SlowInputStreamBase<arrow::io::RandomAccessFile>").pointerTypes("RandomAccessFileSlowInputStreamBase").define().purify())
 
                .put(new Info("arrow::Buffer::FromString(std::string)").javaText(
                        "public static native @SharedPtr @ByVal ArrowBuffer FromString(@Cast({\"\", \"std::string&&\"}) @StdString BytePointer data);\n"

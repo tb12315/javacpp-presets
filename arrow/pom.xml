@@ -44,9 +44,15 @@
                 <exclude>org/bytedeco/arrow/${javacpp.platform}/*.exp</exclude>
                 <exclude>org/bytedeco/arrow/${javacpp.platform}/*.lib</exclude>
                 <exclude>org/bytedeco/arrow/${javacpp.platform}/*.obj</exclude>
-                <exclude>org/bytedeco/arrow/${javacpp.platform}/lib/libarrow*</exclude>
+                <exclude>org/bytedeco/arrow/${javacpp.platform}/include/*llvm*/**</exclude>
+                <exclude>org/bytedeco/arrow/${javacpp.platform}/lib/*LLVM*</exclude>
+                <exclude>org/bytedeco/arrow/${javacpp.platform}/lib/*LTO*</exclude>
+                <exclude>org/bytedeco/arrow/${javacpp.platform}/lib/lib*</exclude>
                 <exclude>org/bytedeco/arrow/${javacpp.platform}/lib/*static.lib</exclude>
-                <exclude>${javacpp.platform.library.path}/lib/libarrow*</exclude>
+                <exclude>${javacpp.platform.library.path}/include/*llvm*/**</exclude>
+                <exclude>${javacpp.platform.library.path}/lib/*LLVM*</exclude>
+                <exclude>${javacpp.platform.library.path}/lib/*LTO*</exclude>
+                <exclude>${javacpp.platform.library.path}/lib/lib*</exclude>
                 <exclude>${javacpp.platform.library.path}/lib/*static.lib</exclude>
               </excludes>
             </configuration>
